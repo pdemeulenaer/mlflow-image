@@ -35,16 +35,18 @@ stages:
     #     repository: 'pdemeulenaer/mlflow-server'
     #     command: 'push'
 
-    - task: Docker@2
-      inputs:
-        containerRegistry: 'dockerhub-connection'
-        repository: 'pdemeulenaer/mlflow-server'
-        command: 'buildAndPush'
-        Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+    # - task: Docker@2
+    #   inputs:
+    #     containerRegistry: 'dockerhub-connection'
+    #     repository: 'pdemeulenaer/mlflow-server'
+    #     command: 'buildAndPush'
+    #     Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+
+
 
     - task: oc-cmd@2
       inputs:
         connectionType: 'OpenShift Connection Service'
         openshiftService: 'openshift_connect'
-        cmd: 'oc login & oc get deploy'
+        cmd: 'oc login --token=sha256~gfJUtNZzeVd-3c12WGl75fE3ir4BTcTPh7uDDy9uXow --server=https://api.sandbox-m2.ll9k.p1.openshiftapps.com:6443 & oc get deploy'
         uselocalOc: true
