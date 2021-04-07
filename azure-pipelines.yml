@@ -48,5 +48,5 @@ stages:
       inputs:
         connectionType: 'OpenShift Connection Service'
         openshiftService: 'openshift_connect'
-        cmd: 'oc login --token=sha256~gfJUtNZzeVd-3c12WGl75fE3ir4BTcTPh7uDDy9uXow --server=https://api.sandbox-m2.ll9k.p1.openshiftapps.com:6443 & oc get deploy'
+        cmd: 'oc get deploy'
         uselocalOc: true
