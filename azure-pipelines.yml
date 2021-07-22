@@ -20,33 +20,33 @@ stages:
     pool:
       vmImage: ubuntu-latest
     steps:
-    # - task: Docker@2
-    #   displayName: Build an image
-    #   inputs:
-    #     command: build
-    #     dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-    #     tags: |
-    #       $(tag)
-
-    # - task: Docker@2
-    #   displayName: Push the image
-    #   inputs:
-    #     containerRegistry: 'dockerhub-connection'
-    #     repository: 'pdemeulenaer/mlflow-server'
-    #     command: 'push'
-
-    # - task: Docker@2
-    #   inputs:
-    #     containerRegistry: 'dockerhub-connection'
-    #     repository: 'pdemeulenaer/mlflow-server'
-    #     command: 'buildAndPush'
-    #     Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
-
-
-
-    - task: oc-cmd@2
+    - task: Docker@2
+      displayName: Build an image
       inputs:
-        connectionType: 'OpenShift Connection Service'
-        openshiftService: 'openshift_connect'
-        cmd: 'oc get deploy'
-        uselocalOc: true
+        command: build
+        dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+        tags: |
+          $(tag)
+
+    - task: Docker@2
+      displayName: Push the image
+      inputs:
+        containerRegistry: 'dockerhub-connection'
+        repository: 'pdemeulenaer/mlflow-server'
+        command: 'push'
+
+    - task: Docker@2
+      inputs:
+        containerRegistry: 'dockerhub-connection'
+        repository: 'pdemeulenaer/mlflow-server'
+        command: 'buildAndPush'
+        Dockerfile: '$(Build.SourcesDirectory)/Dockerfile'
+
+
+
+    # - task: oc-cmd@2
+    #   inputs:
+    #     connectionType: 'OpenShift Connection Service'
+    #     openshiftService: 'openshift_connect'
+    #     cmd: 'oc get deploy'
+    #     uselocalOc: true
